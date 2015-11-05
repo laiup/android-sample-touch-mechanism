@@ -40,8 +40,8 @@ public class CustomView extends Button {
                 L.m("View dispatchTouchEvent ACTION_CANCEL");
                 break;
         }
-
-        boolean result = super.dispatchTouchEvent(ev);
+        boolean result = true;
+        result = super.dispatchTouchEvent(ev);
         L.m("View dispatchTouchEvent RETURN : " + result);
         return result;
     }
@@ -62,9 +62,9 @@ public class CustomView extends Button {
                 L.m("View onTouchEvent ACTION_CANCEL");
                 break;
         }
-
-        boolean result = super.onTouchEvent(ev);
+        boolean result = false;
+//        result = super.onTouchEvent(ev);
         L.m("View onTouchEvent RETURN : " + result);
-        return false;
+        return result;
     }
 }

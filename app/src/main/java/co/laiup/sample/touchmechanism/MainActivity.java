@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
                 L.m("Activity dispatchTouchEvent ACTION_CANCEL");
                 break;
         }
-
-        boolean result = super.dispatchTouchEvent(ev);
+        boolean result = true;
+        result = super.dispatchTouchEvent(ev);
         L.m("Activity dispatchTouchEvent RETURN : " + result);
         return result;
     }

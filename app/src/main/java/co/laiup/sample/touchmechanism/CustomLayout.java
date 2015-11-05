@@ -24,6 +24,16 @@ public class CustomLayout extends RelativeLayout {
         super(context, attrs, defStyleAttr);
     }
 
+    /*
+     * #description:
+     * Life cycle (all method return false) : Activity - dispatchTouchEvent() -> supper.dispatchTouchEvent() call Layout - dispatchTouchEvent()
+     * -> supper.dispatchTouchEvent() -> call View - dispatchTouchEvent() -> super.dispatchTouchEvent()
+     * call View - onTouchEvent() -> View - dispatchTouchEvent() -> Layout - TouchEvent() -> Layout - dispatchTouchEvent()
+     * -> Activity - onTouchEvent() -> Activity - dispatchTouchEvent()
+     *
+     * - in dispatchTouchEvent : super.dispatchTouchEvent -> call onInterceptTouchEvent
+     * - if in dispatchTouchEvent you don't call super.dispatchTouchEvent -> Touch Lifecycle will be stopped there.
+     */
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         switch (ev.getActionMasked()) {
@@ -40,8 +50,8 @@ public class CustomLayout extends RelativeLayout {
                 L.m("Layout dispatchTouchEvent ACTION_CANCEL");
                 break;
         }
-
-        boolean result = super.dispatchTouchEvent(ev);
+        boolean result = true;
+        result = super.dispatchTouchEvent(ev);
         L.m("Layout dispatchTouchEvent RETURN : " + result);
         return result;
     }
@@ -62,8 +72,8 @@ public class CustomLayout extends RelativeLayout {
                 L.m("Layout onInterceptTouchEvent ACTION_CANCEL");
                 break;
         }
-
-        boolean result = super.onInterceptTouchEvent(ev);
+        boolean result = true;
+        result = super.onInterceptTouchEvent(ev);
         L.m("Layout onInterceptTouchEvent RETURN : " + result);
         return result;
     }
@@ -84,8 +94,8 @@ public class CustomLayout extends RelativeLayout {
                 L.m("Layout onTouchEvent ACTION_CANCEL");
                 break;
         }
-
-        boolean result = super.onTouchEvent(ev);
+        boolean result = true;
+        result = super.onTouchEvent(ev);
         L.m("Layout onTouchEvent RETURN : " + result);
         return result;
     }
