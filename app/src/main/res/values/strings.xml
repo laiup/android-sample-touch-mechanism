@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">android-sample-touch-mechanism</string>
+    <string name="button">View</string>
+    <string name="text">Layout</string>
 </resources>
