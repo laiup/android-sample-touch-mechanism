@@ -27,7 +27,7 @@ public class CustomLayout extends RelativeLayout {
     /*
      * #description:
      * Life cycle (all method return false) : Activity - dispatchTouchEvent() -> supper.dispatchTouchEvent() call Layout - dispatchTouchEvent()
-     * -> supper.dispatchTouchEvent() -> call View - dispatchTouchEvent() -> super.dispatchTouchEvent()
+     * -> supper.dispatchTouchEvent() -> call Layout - interceptTouchEvent() -> View - dispatchTouchEvent() -> super.dispatchTouchEvent()
      * call View - onTouchEvent() -> View - dispatchTouchEvent() -> Layout - TouchEvent() -> Layout - dispatchTouchEvent()
      * -> Activity - onTouchEvent() -> Activity - dispatchTouchEvent()
      *
@@ -67,13 +67,14 @@ public class CustomLayout extends RelativeLayout {
                 break;
             case MotionEvent.ACTION_MOVE:
                 L.m("Layout onInterceptTouchEvent ACTION_MOVE");
-                break;
+                return true;
+//                break;
             case MotionEvent.ACTION_CANCEL:
                 L.m("Layout onInterceptTouchEvent ACTION_CANCEL");
                 break;
         }
-        boolean result = true;
-        result = super.onInterceptTouchEvent(ev);
+        boolean result = false;
+//        result = super.onInterceptTouchEvent(ev);
         L.m("Layout onInterceptTouchEvent RETURN : " + result);
         return result;
     }
@@ -89,13 +90,14 @@ public class CustomLayout extends RelativeLayout {
                 break;
             case MotionEvent.ACTION_MOVE:
                 L.m("Layout onTouchEvent ACTION_MOVE");
-                break;
+                return true;
+//                break;
             case MotionEvent.ACTION_CANCEL:
                 L.m("Layout onTouchEvent ACTION_CANCEL");
                 break;
         }
-        boolean result = true;
-        result = super.onTouchEvent(ev);
+        boolean result = false;
+//        result = super.onTouchEvent(ev);
         L.m("Layout onTouchEvent RETURN : " + result);
         return result;
     }

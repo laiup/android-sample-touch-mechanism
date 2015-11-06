@@ -40,7 +40,7 @@ public class CustomView extends Button {
                 L.m("View dispatchTouchEvent ACTION_CANCEL");
                 break;
         }
-        boolean result = true;
+        boolean result = false;
         result = super.dispatchTouchEvent(ev);
         L.m("View dispatchTouchEvent RETURN : " + result);
         return result;
@@ -48,6 +48,12 @@ public class CustomView extends Button {
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
+        /*
+         * Block touch event for layout (parent of this view)
+         * Ex: Scroll RecyclerView into a ScrollView
+         */
+        getParent().requestDisallowInterceptTouchEvent(true);
+
         switch (ev.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
                 L.m("View onTouchEvent ACTION_DOWN");
@@ -62,7 +68,7 @@ public class CustomView extends Button {
                 L.m("View onTouchEvent ACTION_CANCEL");
                 break;
         }
-        boolean result = false;
+        boolean result = true;
 //        result = super.onTouchEvent(ev);
         L.m("View onTouchEvent RETURN : " + result);
         return result;
